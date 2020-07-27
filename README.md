@@ -14,4 +14,4 @@ Sudoku instances can be found in the directories **sudoku/data/easy_to_solve** a
 * [PyGame](https://www.pygame.org/wiki/GettingStarted)
 
 ## About:
-Created as semestral project for the [Artificial Intelligence Fundamentals](http://bilakniha.cvut.cz/cs/predmet2358306.html) course at [FIT CTU](https://fit.cvut.cz/).
+Created as a semestral project for the [Artificial Intelligence Fundamentals](http://bilakniha.cvut.cz/cs/predmet2358306.html) course at [FIT CTU](https://fit.cvut.cz/).
