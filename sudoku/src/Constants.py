@@ -11,7 +11,7 @@ BEST_PHER_EVAPORATION = 0.005
 
 GREEDINESS = 0.9
 
-# Gui constants
+# GUI constants
 WIN_HEIGHT = 950
 
 WIN_WIDTH = 700
