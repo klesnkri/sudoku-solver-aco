@@ -1,7 +1,9 @@
 import random
 
+
 class Ant:
-    def __init__(self, pher_matrix=None, initial_pher_val=0, local_pher_update=0, greediness=1, grid=None, start_pos=(0, 0)):
+    def __init__(self, pher_matrix=None, initial_pher_val=0, local_pher_update=0, greediness=1, grid=None,
+                 start_pos=(0, 0)):
         self.pher_matrix = pher_matrix
 
         self.initial_pher_val = initial_pher_val
@@ -33,7 +35,7 @@ class Ant:
                     if pher[val - 1] > best_pheromone:
                         best_val = val
                         best_pheromone = pher[val - 1]
-            #roulette wheel selection
+            # roulette wheel selection
             else:
                 total_pher = 0
                 wheel = []
@@ -60,7 +62,8 @@ class Ant:
 
             # update local pheromone -> decrease the probability of the value being selected by other ant
             pher_val_to_update = self.pher_matrix[self.pos[0]][self.pos[1]][best_val - 1]
-            self.pher_matrix[self.pos[0]][self.pos[1]][best_val - 1] = (1 - self.local_pher_update) * pher_val_to_update + self.local_pher_update * self.initial_pher_val
+            self.pher_matrix[self.pos[0]][self.pos[1]][best_val - 1] = (
+                                                                                   1 - self.local_pher_update) * pher_val_to_update + self.local_pher_update * self.initial_pher_val
 
         # move by one cell
         new_row = self.pos[0]

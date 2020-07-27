@@ -2,6 +2,7 @@ from logic.Cell import Cell
 
 import math
 
+
 class Grid:
     def __init__(self, grid_size):
         # initialize empty sudoku 9x9 grid
@@ -9,7 +10,7 @@ class Grid:
         self.cell_cnt = grid_size ** 2
         self.fixed_cell_cnt = 0
         self.failed_cell_cnt = 0
-        self.grid = [[Cell() for cols in range(self.grid_size)] for rows in range(self.grid_size)]
+        self.grid = [[Cell(self.grid_size) for cols in range(self.grid_size)] for rows in range(self.grid_size)]
 
     def get_cell(self, pos):
         return self.grid[pos[0]][pos[1]]

@@ -57,8 +57,8 @@ class AntSolver:
                 # update pheromone matrix
                 if not sol_cell.failed():
                     self.pher_matrix[row][col][sol_cell.get_val() - 1] = self.pher_matrix[row][col][
-                                                                               sol_cell.get_val() - 1] * (
-                                                                                   1 - self.global_pher_update) + self.global_pher_update * self.best_pher_to_add
+                                                                             sol_cell.get_val() - 1] * (
+                                                                                 1 - self.global_pher_update) + self.global_pher_update * self.best_pher_to_add
 
     def solve(self, local_pher_update, greediness):
         solved = False
@@ -74,7 +74,8 @@ class AntSolver:
                 start_pos = (random.randint(0, self.grid.grid_size - 1), random.randint(0, self.grid.grid_size - 1))
 
                 # add ant
-                self.ants[i] = Ant(self.pher_matrix, self.initial_pher_val, local_pher_update, greediness, copy.deepcopy(self.grid), start_pos)
+                self.ants[i] = Ant(self.pher_matrix, self.initial_pher_val, local_pher_update, greediness,
+                                   copy.deepcopy(self.grid), start_pos)
 
             # step with each ant by one cell until they fill all the cells on the grid
             for step in range(self.grid.cell_cnt):

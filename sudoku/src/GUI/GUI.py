@@ -3,12 +3,14 @@ from GUI.GUIgrid import GUIgrid
 import pygame
 import time
 
+
 def format_time(secs):
     min = secs // 60
     sec = secs % 60
     millis = (secs * 100) % 100
-    time_str = "{:02.0f}".format(min) + ":" + "{:02.0f}".format(sec) + ":" +  "{:02.0f}".format(millis)
+    time_str = "{:02.0f}".format(min) + ":" + "{:02.0f}".format(sec) + ":" + "{:02.0f}".format(millis)
     return time_str
+
 
 class GUI:
     def __init__(self, win_width, win_height, grid_size):
@@ -39,7 +41,8 @@ class GUI:
 
         # delete old message
         thick = 4
-        pygame.draw.rect(self.win, (255, 255, 255), (self.win_width / 3, self.win_width + thick, 2 * self.win_width / 3, self.win_height - self.win_width - thick))
+        pygame.draw.rect(self.win, (255, 255, 255), (
+        self.win_width / 3, self.win_width + thick, 2 * self.win_width / 3, self.win_height - self.win_width - thick))
 
         # print new message
         self.win.blit(text_box, (x, y))
@@ -143,7 +146,9 @@ class GUI:
             self.start_button = pygame.Rect(x, y, text_box.get_width() + padding, text_box.get_height() + padding)
 
         pygame.draw.rect(self.win, (0, 0, 0), self.start_button)
-        pygame.draw.rect(self.win, (255, 255, 255), (self.start_button.left + 3, self.start_button.top + 3, self.start_button.width - 6, self.start_button.height - 6))
+        pygame.draw.rect(self.win, (255, 255, 255), (
+        self.start_button.left + 3, self.start_button.top + 3, self.start_button.width - 6,
+        self.start_button.height - 6))
         self.win.blit(text_box, (x + padding / 2, y + padding / 2))
 
         # draw grid and board
@@ -154,4 +159,3 @@ class GUI:
     def end(self):
         pygame.font.quit()
         pygame.quit()
-

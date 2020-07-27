@@ -1,5 +1,6 @@
 import pygame
 
+
 class GUICube:
     def __init__(self, win, row, col, size):
         self.win = win
@@ -7,8 +8,6 @@ class GUICube:
         self.col = col
         self.size = size
         self.initial_cell = False
-
-
 
     def draw(self, val, pher_val):
         font = pygame.font.SysFont("dejavusansmono", 40)
@@ -24,7 +23,7 @@ class GUICube:
         else:
             text = font.render(str(val), 1, (0, 0, 0))
 
-        self.win.blit(text, (x + (self.size /2 - text.get_width()/2), y + (self.size/2 - text.get_height()/2)))
+        self.win.blit(text, (x + (self.size / 2 - text.get_width() / 2), y + (self.size / 2 - text.get_height() / 2)))
 
         font = pygame.font.SysFont("dejavusansmono", 20)
 

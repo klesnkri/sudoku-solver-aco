@@ -1,11 +1,11 @@
-from logic.Constants import *
-
 class Cell:
-    def __init__(self):
+    def __init__(self, grid_size):
         # possible values of cell (1 - 9)
         self.possible_vals = []
 
-        for i in range(1, GRID_SIZE + 1):
+        self.grid_size = grid_size
+
+        for i in range(1, self.grid_size + 1):
             self.possible_vals.append(i)
 
     def fixed(self):
