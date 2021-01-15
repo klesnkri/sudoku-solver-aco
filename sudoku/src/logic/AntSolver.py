@@ -6,33 +6,28 @@ import copy
 
 class AntSolver:
     def __init__(self, grid, global_pher_update, best_pher_evaporation, num_of_ants, gui, gui_active):
-        # grid
+        # Grid
         self.grid = grid
 
         self.global_pher_update = global_pher_update
-
         self.best_pher_evaporation = best_pher_evaporation
-
         self.num_of_ants = num_of_ants
-
         self.gui = gui
-
         self.gui_active = gui_active
 
-        # array of ants
+        # Array of ants
         self.ants = [Ant() for i in range(self.num_of_ants)]
 
-        # initial pheromone matrix val
+        # Initial pheromone matrix val
         self.initial_pher_val = 1 / self.grid.cell_cnt
 
-        # pheromone matrix
+        # Pheromone matrix
         self.pher_matrix = [
-            [[self.initial_pher_val for vals in range(self.grid.grid_size)] for cols in
+            [[self.initial_pher_val for _ in range(self.grid.grid_size)] for _ in
              range(self.grid.grid_size)]
-            for rows in range(self.grid.grid_size)]
+            for _ in range(self.grid.grid_size)]
 
         self.solution = self.grid
-
         self.best_pher_to_add = 0
 
     def print_pher_matrix(self):
@@ -54,7 +49,7 @@ class AntSolver:
             for col in range(self.grid.grid_size):
                 sol_cell = self.solution.get_cell((row, col))
 
-                # update pheromone matrix
+                # Update pheromone matrix
                 if not sol_cell.failed():
                     self.pher_matrix[row][col][sol_cell.get_val() - 1] = self.pher_matrix[row][col][
                                                                              sol_cell.get_val() - 1] * (
@@ -65,31 +60,30 @@ class AntSolver:
         cycle = 1
 
         while not solved:
-
             if not self.gui_active:
                 print("cycle: ", cycle)
 
             for i in range(self.num_of_ants):
-                # randomly selected position where ant will start solving sudoku
+                # Randomly selected position where ant will start solving sudoku
                 start_pos = (random.randint(0, self.grid.grid_size - 1), random.randint(0, self.grid.grid_size - 1))
 
-                # add ant
+                # Add ant
                 self.ants[i] = Ant(self.pher_matrix, self.initial_pher_val, local_pher_update, greediness,
                                    copy.deepcopy(self.grid), start_pos)
 
-            # step with each ant by one cell until they fill all the cells on the grid
+            # Step with each ant by one cell until they fill all the cells on the grid
             for step in range(self.grid.cell_cnt):
                 for ant in self.ants:
                     ant.step()
 
-            # find best performing ant
+            # Find best performing ant
             best_ant_fixed_cnt = 0
             best_ant = None
 
             for idx, ant in enumerate(self.ants):
                 num_fixed = ant.get_fixed_cnt()
 
-                # sudoku is solved
+                # Sudoku is solved
                 if num_fixed == self.grid.cell_cnt:
                     self.solution = ant.grid
 
@@ -102,7 +96,7 @@ class AntSolver:
 
                     return self.solution
 
-                # new best
+                # New best
                 if num_fixed > best_ant_fixed_cnt:
                     best_ant = ant
                     best_ant_fixed_cnt = num_fixed
@@ -113,10 +107,10 @@ class AntSolver:
                 self.solution = best_ant.grid
                 self.best_pher_to_add = pher_to_add
 
-            # do global pheromone update
+            # Do global pheromone update
             self.global_pher_matrix_update()
 
-            # do best value evaporation
+            # Do best value evaporation
             self.best_pher_to_add *= (1 - self.best_pher_evaporation)
 
             if self.gui_active:

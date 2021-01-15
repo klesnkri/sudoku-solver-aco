@@ -5,12 +5,12 @@ import math
 
 class Grid:
     def __init__(self, grid_size):
-        # initialize empty sudoku 9x9 grid
+        # Initialize empty sudoku 9x9 grid
         self.grid_size = grid_size
         self.cell_cnt = grid_size ** 2
         self.fixed_cell_cnt = 0
         self.failed_cell_cnt = 0
-        self.grid = [[Cell(self.grid_size) for cols in range(self.grid_size)] for rows in range(self.grid_size)]
+        self.grid = [[Cell(self.grid_size) for _ in range(self.grid_size)] for _ in range(self.grid_size)]
 
     def get_cell(self, pos):
         return self.grid[pos[0]][pos[1]]
@@ -113,7 +113,7 @@ class Grid:
                                 self.fixed_cell_cnt += 1
                                 self.propagate_constraints_cell(cell_coo)
 
-    # propagate constraints after setting cell
+    # Propagate constraints after setting cell
     def propagate_constraints_cell(self, pos):
         self.propagate_constraints_row(pos)
         self.propagate_constraints_col(pos)
@@ -179,7 +179,7 @@ class Grid:
                 if not cell.fixed() and not cell.failed():
                     self.deduce_val_cell((row, col))
 
-    # read sudoku grid
+    # Read sudoku grid
     def read_grid(self, sudoku_file):
         input_grid = open(sudoku_file, "r")
 
@@ -191,7 +191,7 @@ class Grid:
             for col in range(self.grid_size):
                 val = vals[col]
 
-                # not valid sudoku value
+                # Not valid sudoku value
                 if not (vals[col] == '-' or (val.isdigit() and 1 <= int(val) <= self.grid_size)):
                     input_grid.close()
                     return False

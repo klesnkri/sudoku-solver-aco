@@ -31,7 +31,7 @@ class GUI:
         pygame.display.set_caption("Ant colony optimization sudoku solver")
 
     def print_message(self, msg):
-        # message
+        # Message
         font = pygame.font.SysFont("dejavusansmono", 25)
         text_box = font.render(msg, True, (0, 0, 0))
         text_rect = text_box.get_rect()
@@ -39,12 +39,13 @@ class GUI:
         x = 2 * self.win_width / 3 - text_rect.width / 2
         y = (self.win_height + self.win_width) / 2 - text_rect.height / 2
 
-        # delete old message
+        # Delete old message
         thick = 4
         pygame.draw.rect(self.win, (255, 255, 255), (
-        self.win_width / 3, self.win_width + thick, 2 * self.win_width / 3, self.win_height - self.win_width - thick))
+            self.win_width / 3, self.win_width + thick, 2 * self.win_width / 3,
+            self.win_height - self.win_width - thick))
 
-        # print new message
+        # Print new message
         self.win.blit(text_box, (x, y))
 
         pygame.display.update()
@@ -52,7 +53,7 @@ class GUI:
     def final_screen(self, msg):
         self.print_message(msg)
 
-        # wait till window is closed or start pressed again
+        # Wait till window is closed or start pressed again
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -61,14 +62,14 @@ class GUI:
                     return True
 
     def screen_with_message(self, grid, msg="", wait=True, cycle=0, pher_matrix=None):
-        # redraw
+        # Redraw
         self.redraw(grid, cycle, False, pher_matrix)
 
-        # print message
+        # Print message
         if msg != "":
             self.print_message(msg)
 
-        # if wait is True, wait till window is closed or start pressed again
+        # If wait is True, wait till window is closed or start pressed again
         if wait:
 
             saved_time = self.start_time
@@ -82,12 +83,12 @@ class GUI:
                         return True
 
     def initial_screen(self, grid, msg):
-        # redraw screen
+        # Redraw screen
         self.redraw(grid, 0, True)
 
         self.print_message(msg)
 
-        # wait till start button is clicked
+        # Wait till start button is clicked
         start_button_clicked = False
 
         while not start_button_clicked:
@@ -99,7 +100,7 @@ class GUI:
                         start_button_clicked = True
                         break
 
-        # start counting time
+        # Start counting time
         self.start_time = time.time()
         return True
 
@@ -108,7 +109,7 @@ class GUI:
 
         font = pygame.font.SysFont("dejavusansmono", 25)
 
-        # time
+        # Time
         if start:
             play_time = 0
         else:
@@ -124,19 +125,19 @@ class GUI:
         y = self.win_width + padding
         self.win.blit(text_box, (x, y))
 
-        # fixed cells
+        # Fixed cells
         text = "Fixed cells: " + str(grid.fixed_cell_cnt)
         text_box = font.render(text, True, (0, 0, 0))
         y = y + text_height + padding
         self.win.blit(text_box, (x, y))
 
-        # cycle
+        # Cycle
         text = "Cycle: " + str(cycle)
         text_box = font.render(text, True, (0, 0, 0))
         y = y + text_height + padding
         self.win.blit(text_box, (x, y))
 
-        # start button
+        # Start button
         text = "Start"
         text_box = font.render(text, True, (0, 0, 0))
         x = self.win_width / 6 - (text_box.get_width() + padding) / 2
@@ -147,11 +148,11 @@ class GUI:
 
         pygame.draw.rect(self.win, (0, 0, 0), self.start_button)
         pygame.draw.rect(self.win, (255, 255, 255), (
-        self.start_button.left + 3, self.start_button.top + 3, self.start_button.width - 6,
-        self.start_button.height - 6))
+            self.start_button.left + 3, self.start_button.top + 3, self.start_button.width - 6,
+            self.start_button.height - 6))
         self.win.blit(text_box, (x + padding / 2, y + padding / 2))
 
-        # draw grid and board
+        # Draw grid and board
         self.GUIgrid.draw(grid, pher_matrix, start)
 
         pygame.display.update()

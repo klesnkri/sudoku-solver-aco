@@ -5,15 +5,10 @@ class Ant:
     def __init__(self, pher_matrix=None, initial_pher_val=0, local_pher_update=0, greediness=1, grid=None,
                  start_pos=(0, 0)):
         self.pher_matrix = pher_matrix
-
         self.initial_pher_val = initial_pher_val
-
         self.local_pher_update = local_pher_update
-
         self.greediness = greediness
-
         self.grid = grid
-
         self.pos = start_pos
 
     def get_fixed_cnt(self):
@@ -23,19 +18,19 @@ class Ant:
         cell = self.grid.get_cell(self.pos)
 
         if not cell.failed() and not cell.fixed():
-            # select value based on pheromone matrix
+            # Select value based on pheromone matrix
             pher = self.pher_matrix[self.pos[0]][self.pos[1]]
             best_val = 0
             best_pheromone = 0
             possible_vals = self.grid.get_cell(self.pos).possible_vals
 
-            # greedy selection
+            # Greedy selection
             if random.random() > self.greediness:
                 for val in possible_vals:
                     if pher[val - 1] > best_pheromone:
                         best_val = val
                         best_pheromone = pher[val - 1]
-            # roulette wheel selection
+            # Roulette wheel selection
             else:
                 total_pher = 0
                 wheel = []
@@ -51,21 +46,21 @@ class Ant:
                         best_val = possible_vals[val_idx]
                         break
 
-            # set value
+            # Set value
             self.grid.set_cell_val(self.pos, best_val)
 
-            # propagate constraints
+            # Propagate constraints
             self.grid.propagate_constraints_cell(self.pos)
 
-            # try deducing values of some cells
+            # Try deducing values of some cells
             self.grid.deduce_vals_all_cells()
 
-            # update local pheromone -> decrease the probability of the value being selected by other ant
+            # Update local pheromone -> decrease the probability of the value being selected by other ant
             pher_val_to_update = self.pher_matrix[self.pos[0]][self.pos[1]][best_val - 1]
             self.pher_matrix[self.pos[0]][self.pos[1]][best_val - 1] = (
-                                                                                   1 - self.local_pher_update) * pher_val_to_update + self.local_pher_update * self.initial_pher_val
+                                                                               1 - self.local_pher_update) * pher_val_to_update + self.local_pher_update * self.initial_pher_val
 
-        # move by one cell
+        # Move by one cell
         new_row = self.pos[0]
         new_col = self.pos[1] + 1
 

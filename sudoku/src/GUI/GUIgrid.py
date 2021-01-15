@@ -13,7 +13,7 @@ class GUIgrid:
                       range(self.grid_size)]
 
     def draw(self, grid, pher_matrix=None, start=False):
-        # set cells with value returned by best ant and highest value based on pheromone matrix
+        # Set cells with value returned by best ant and highest value based on pheromone matrix
         for row in range(self.grid_size):
             for col in range(self.grid_size):
                 cell = grid.get_cell((row, col))
@@ -24,7 +24,7 @@ class GUIgrid:
                 if pher_matrix:
                     pher_vals = pher_matrix[row][col]
 
-                    # value with the highest pheromone value
+                    # Value with the highest pheromone value
                     if len(set(pher_vals)) != 1:
                         pher_val = pher_vals.index(max(pher_vals)) + 1
 

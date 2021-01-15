@@ -1,6 +1,6 @@
 class Cell:
     def __init__(self, grid_size):
-        # possible values of cell (1 - 9)
+        # Possible values of cell (1 - 9)
         self.possible_vals = []
 
         self.grid_size = grid_size
@@ -17,11 +17,11 @@ class Cell:
     def get_val(self):
         return self.possible_vals[0]
 
-    # set cell to value
+    # Set cell to value
     def set_val(self, new_val):
         self.possible_vals = [new_val]
 
-    # delete value from possible values
+    # Delete value from possible values
     def delete(self, val):
         self.possible_vals = [pos_val for pos_val in self.possible_vals if pos_val != val]
 

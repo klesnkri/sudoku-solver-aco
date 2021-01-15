@@ -7,7 +7,6 @@ from GUI.GUI import GUI
 class App:
     def __init__(self, gui_active, sudoku_file):
         self.gui_active = gui_active
-
         self.sudoku_file = sudoku_file
 
     def run(self):
@@ -37,7 +36,7 @@ class App:
                 print(msg)
                 grid.print()
 
-            # perform constraint propagation
+            # Perform constraint propagation
             grid.propagate_constraints_all_cells()
 
             msg = "After constraint propagation"
@@ -48,7 +47,7 @@ class App:
                 print(msg)
                 grid.print()
 
-            # try deducing values of some cells
+            # Try deducing values of some cells
             grid.deduce_vals_all_cells()
 
             msg = "After deducing values"
@@ -81,7 +80,7 @@ class App:
                 else:
                     print(msg)
 
-            # solve using ant colony system
+            # Solve using ant colony system
             msg = "Ant colony system"
             if self.gui_active:
                 gui.print_message(msg)
